@@ -1,4 +1,4 @@
-package route
+package router
 
 import (
 	"github.com/g8y3e/router/entity"
@@ -11,7 +11,7 @@ type Route struct {
 	pathController entity.IController
 }
 
-func New() *Route {
+func NewRoute() *Route {
 	return &Route{}
 }
 
