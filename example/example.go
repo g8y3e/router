@@ -1,4 +1,4 @@
-package example
+package main
 
 import (
 	"fmt"
@@ -23,10 +23,10 @@ func main() {
 	r := router.New(cf)
 
 	// 1 variant
-	r.Get("test1").Middleware(&TestController{}, &TestController{}).Controller(&TestController{})
+	r.Get("/test1").Controller(&TestController{})
 
 	// 2 variant
-	testRoute := r.Get("test2")
+	testRoute := r.Get("/test2")
 	testRoute.Middleware(&TestController{}, &TestController{})
 	testRoute.Controller(&TestController{})
 

@@ -5,6 +5,7 @@ import (
 	"github.com/g8y3e/router/entity"
 	"github.com/g8y3e/router/route"
 	"net/http"
+	"regexp"
 )
 
 type Router struct {
@@ -23,6 +24,7 @@ func New(cf *Config) *Router {
 	return &Router{
 		prefix: cf.Prefix,
 		httpNotFound: httpNotFound,
+		routes: map[string]*route.Route{},
 	}
 }
 
@@ -33,6 +35,12 @@ func (r *Router) Get(path string) *route.Route {
 }
 
 func (r *Router) Match(req *http.Request) *route.Route {
+	for key, value := range r.routes {
+		reg := regexp.MustCompile(r.prefix + key)
+		if reg.MatchString(req.URL.Path) {
+			return value
+		}
+	}
 	return nil
 }
 

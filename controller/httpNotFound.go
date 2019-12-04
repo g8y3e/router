@@ -1,12 +1,15 @@
 package controller
 
 import (
-	"github.com/g8y3e/router/entity"
+	"fmt"
+	"net/http"
 )
 
 type HttpNotFound struct {
 }
 
-func (h *HttpNotFound) Process(ctx *entity.Context) error {
+func (h *HttpNotFound) Process(w http.ResponseWriter, req *http.Request) error {
+	w.Header().Add("Content-Type", "application/json")
+	fmt.Fprint(w, `{"error": "Page not found"}`)
 	return nil
 }
